@@ -1,10 +1,5 @@
 <script>
   import Pokemon from "../components/Pokemon.svelte";
-
-  let pokemon = {
-    name: "Pikachu",
-    type: "Fire"
-  };
 </script>
 
 <svelte:head>
