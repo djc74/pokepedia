@@ -8,4 +8,3 @@
 
 <h1>Hello Michael, here are your Pokemon</h1>
 <Pokemon />
-<Pokemon />
