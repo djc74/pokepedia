@@ -12,8 +12,13 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  function newNumber() {
+    number = getRandomInteger(100, 808);
+  }
+
   function handleClick() {
-    number += 1;
+    newNumber();
+    console.log(number);
   }
 
   onMount(async () => {
@@ -32,16 +37,16 @@
   }
   button {
     border: 1px solid black;
-    padding: 10px;
     font-size: 24px;
+    padding: 8px 16px;
   }
 </style>
 
 <div>
+  <h2>{name}</h2>
   <img
     src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/{number}.png"
     alt="pokemon" />
-  <h2>{name}</h2>
   <p>{description}</p>
   <button on:click={handleClick}>Find a pokemon</button>
 </div>
