@@ -6,5 +6,5 @@
   <title>Pokey</title>
 </svelte:head>
 
-<h1>Hello Michael, here are your Pokemon</h1>
+<h1>You have found ...</h1>
 <Pokemon />
