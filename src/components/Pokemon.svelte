@@ -12,23 +12,20 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function newNumber() {
-    number = getRandomInteger(100, 808);
-  }
-
   function handleClick() {
-    newNumber();
-    console.log(number);
+    number = getRandomInteger(100, 808);
+    findPokemon();
   }
 
-  onMount(async () => {
-    const result = await fetch(
-      "https://pokeapi.co/api/v2/pokemon-species/" + number
-    );
-    data = await result.json();
+  async function findPokemon() {
+    const url = "https://pokeapi.co/api/v2/pokemon-species/" + number;
+    const response = await fetch(url);
+    data = await response.json();
     description = data.flavor_text_entries[1].flavor_text;
     name = data.names[2].name;
-  });
+  }
+
+  findPokemon();
 </script>
 
 <style>
@@ -36,6 +33,7 @@
     height: 250px;
   }
   button {
+    background: lightgoldenrodyellow;
     border: 1px solid black;
     font-size: 24px;
     padding: 8px 16px;
@@ -48,5 +46,5 @@
     src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/{number}.png"
     alt="pokemon" />
   <p>{description}</p>
-  <button on:click={handleClick}>Find a pokemon</button>
+  <button on:click={handleClick}>Find another pokemon</button>
 </div>
