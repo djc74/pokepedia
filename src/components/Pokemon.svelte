@@ -12,11 +12,6 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function handleClick() {
-    number = getRandomInteger(100, 808);
-    findPokemon();
-  }
-
   async function findPokemon() {
     const url = "https://pokeapi.co/api/v2/pokemon-species/" + number;
     const response = await fetch(url);
@@ -24,8 +19,12 @@
     description = data.flavor_text_entries[1].flavor_text;
     name = data.names[2].name;
   }
-
   findPokemon();
+
+  function handleClick() {
+    number = getRandomInteger(100, 808);
+    findPokemon();
+  }
 </script>
 
 <style>
