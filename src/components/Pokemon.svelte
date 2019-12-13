@@ -4,9 +4,9 @@
   let data = [];
   let description = [];
   let name = [];
-  let number = getRandomInteger(100, 808);
+  let number = getRandomNumber(100, 808);
 
-  function getRandomInteger(min, max) {
+  function getRandomNumber(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,10 +19,13 @@
     description = data.flavor_text_entries[1].flavor_text;
     name = data.names[2].name;
   }
-  findPokemon();
+
+  onMount(() => {
+    findPokemon();
+  });
 
   function handleClick() {
-    number = getRandomInteger(100, 808);
+    number = getRandomNumber(100, 808);
     findPokemon();
   }
 </script>
@@ -39,11 +42,14 @@
   }
 </style>
 
-<div>
+{#await name}
+  <p>... waiting</p>
+{:then name}
   <h2>{name}</h2>
   <img
     src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/{number}.png"
     alt="pokemon" />
   <p>{description}</p>
-  <button on:click={handleClick}>Find another pokemon</button>
-</div>
+{/await}
+
+<button on:click={handleClick}>Find another pokemon</button>
