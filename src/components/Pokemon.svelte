@@ -20,14 +20,14 @@
     name = data.names[2].name;
   }
 
-  onMount(() => {
-    findPokemon();
-  });
-
   function handleClick() {
     number = getRandomNumber(100, 808);
     findPokemon();
   }
+
+  onMount(() => {
+    findPokemon();
+  });
 </script>
 
 <style>
