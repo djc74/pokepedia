@@ -4,7 +4,13 @@
   let data = [];
   let description = [];
   let name = [];
-  let number = getRandomNumber(100, 808);
+  let number = getRandomNumber(1, 808);
+
+  $: if (number <= 9) {
+    number = "00" + number;
+  } else if (number <= 99) {
+    number = "0" + number;
+  }
 
   function getRandomNumber(min, max) {
     min = Math.ceil(min);
@@ -21,8 +27,9 @@
   }
 
   function handleClick() {
-    number = getRandomNumber(100, 808);
+    number = getRandomNumber(1, 808);
     findPokemon();
+    console.log(number);
   }
 
   onMount(() => {
