@@ -1,16 +1,10 @@
 <script>
   import { onMount } from "svelte";
 
-  let data = [];
-  let description = [];
   let name = [];
-  let number = getRandomNumber(1, 808);
-
-  $: if (number <= 9) {
-    number = "00" + number;
-  } else if (number <= 99) {
-    number = "0" + number;
-  }
+  let description = [];
+  let number = getRandomNumber(1, 809);
+  let type = [];
 
   function getRandomNumber(min, max) {
     min = Math.ceil(min);
@@ -18,18 +12,38 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  $: if (number <= 9) {
+    number = "00" + number;
+  } else if (number <= 99) {
+    number = "0" + number;
+  }
+
   async function findPokemon() {
     const url = "https://pokeapi.co/api/v2/pokemon-species/" + number;
     const response = await fetch(url);
-    data = await response.json();
-    description = data.flavor_text_entries[1].flavor_text;
+    const data = await response.json();
     name = data.names[2].name;
+    const language = data.flavor_text_entries[1].language.name;
+    const allLanguages = data.flavor_text_entries;
+    const filtered = allLanguages.filter(lang => lang.language.name === "en");
+    description = filtered[0].flavor_text;
   }
 
+  // async function findPokemonName() {
+  //   const urlName = "https://pokeapi.co/api/v2/pokemon/1";
+  //   const responseName = await fetch(urlName);
+  //   data = await responseName.json();
+  //   name2 = data.name;
+  //   console.log(name2);
+  //   url2 = data.species.url;
+  //   console.log(url2);
+  //   type = data.types[0].type.name;
+  //   console.log(type);
+  // }
+
   function handleClick() {
-    number = getRandomNumber(1, 808);
+    number = getRandomNumber(1, 809);
     findPokemon();
-    console.log(number);
   }
 
   onMount(() => {
