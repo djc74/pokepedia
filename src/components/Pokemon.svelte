@@ -4,7 +4,6 @@
   let name = [];
   let description = [];
   let number = getRandomNumber(1, 809);
-  let type = [];
 
   function getRandomNumber(min, max) {
     min = Math.ceil(min);
@@ -23,23 +22,13 @@
     const response = await fetch(url);
     const data = await response.json();
     name = data.names[2].name;
-    const language = data.flavor_text_entries[1].language.name;
     const allLanguages = data.flavor_text_entries;
-    const filtered = allLanguages.filter(lang => lang.language.name === "en");
-    description = filtered[0].flavor_text;
+    const filteredForEnglish = allLanguages.filter(
+      lang => lang.language.name === "en"
+    );
+    description = filteredForEnglish[0].flavor_text;
+    console.log(number);
   }
-
-  // async function findPokemonName() {
-  //   const urlName = "https://pokeapi.co/api/v2/pokemon/1";
-  //   const responseName = await fetch(urlName);
-  //   data = await responseName.json();
-  //   name2 = data.name;
-  //   console.log(name2);
-  //   url2 = data.species.url;
-  //   console.log(url2);
-  //   type = data.types[0].type.name;
-  //   console.log(type);
-  // }
 
   function handleClick() {
     number = getRandomNumber(1, 809);
